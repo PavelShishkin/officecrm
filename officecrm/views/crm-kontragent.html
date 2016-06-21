@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="views/img/favicon.png">
+
+    <title>Контрагенты</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="views/assets/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="views/assets/bootstrap-timepicker/compiled/timepicker.css" />
+    <link href="views/css/bootstrap.min.css" rel="stylesheet">
+    <link href="views/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="views/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link href="views/css/tasks.css" rel="stylesheet">
+    <!--dynamic table-->
+    <link href="views/assets/advanced-datatable/media/css/demo_page.css" rel="stylesheet" />
+    <link href="views/assets/advanced-datatable/media/css/demo_table.css" rel="stylesheet" />
+    <link rel="stylesheet" href="views/assets/data-tables/DT_bootstrap.css" />
+      <!--right slidebar-->
+      <link href="views/css/slidebars.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="views/css/style.css" rel="stylesheet">
+    <link href="views/css/style-responsive.css" rel="stylesheet" />
+	
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+    
+  <body>
+      <section id="container" class="">
+      <?php include $user ?>
+      <!--header end-->
+      <!--sidebar start-->
+      <?php include $aside ?>
+      <!--sidebar end-->
+  
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!-- page start-->
+              <div class="row">
+                <div class="col-sm-12">
+              <section class="panel">
+              <header class="panel-heading">
+                  Контрагенты
+              <span class="tools pull-right">
+                <a data-toggle="modal" href="#myModal17" title="Дополнительные поля" data-placement="bottom" data-toggle="tooltip" class="fa fa-cogs"></a>
+				
+				<!-- Modal Дополнительные настройки -->
+                              <div class="modal fade full-width-modal-right" id="myModal17" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-sm">
+                                      <div class="modal-content-wrap">
+                                          <div class="modal-content">
+                                              <form action="?action=contr_table" method="post">
+                                              <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                  <h4 class="modal-title">Дополнительные поля</h4>
+                                              </div>
+                                              <div class="modal-body">
+												  <br/>
+                                                  Выберите колонки, которые хотите видеть в основной таблице "Контрагенты"
+												  <br/><br/><br/>
+                                                  <input name="location" value="kontragent" type="hidden">
+												  <div class="checkbox-list">
+													  <label for="closeButton">
+														<div class="checker" id="uniform-closeButton">
+															<span class="checked"><input name="id" id="closeButton" type="checkbox"   class="input-small" <?php if(isset($_SESSION['contr_id'])){ echo 'checked'; }?> ></span>
+														</div>
+														  ID
+													  </label>
+													  <label for="closeButton">
+														<div class="checker" id="uniform-closeButton">
+															<span class="checked"><input  name="name" id="closeButton" type="checkbox" value="checked"  class="input-small" <?php if(isset($_SESSION['contr_name'])){ echo 'checked'; }?>></span>
+														</div>
+														  Наименование
+													  </label>
+													  <label for="closeButton">
+														<div class="checker" id="uniform-closeButton">
+															<span class="checked"><input  name="contact" id="closeButton" type="checkbox" value="checked"  class="input-small" <?php if(isset($_SESSION['contr_contact'])){ echo 'checked'; }?>></span>
+														</div>
+														  Контактные лица
+													  </label>
+													  <label for="closeButton">
+														<div class="checker" id="uniform-closeButton">
+															<span class="checked"><input  name="phone" id="closeButton" type="checkbox" value="checked"  class="input-small" <?php if(isset($_SESSION['contr_phone'])){ echo 'checked'; }?>></span>
+														</div>
+														  Телефоны
+													  </label>
+													  <label for="closeButton">
+														<div class="checker" id="uniform-closeButton">
+															<span class="checked"><input  name="email" id="closeButton" type="checkbox" value="checked"  class="input-small" <?php if(isset($_SESSION['contr_email'])){ echo 'checked'; }?>></span>
+														</div>
+														  E-mail
+													  </label>
+													  <label for="closeButton">
+														<div class="checker" id="uniform-closeButton">
+															<span class="checked"><input  name="otvet" id="closeButton" type="checkbox" value="checked"  class="input-small" <?php if(isset($_SESSION['contr_otvet'])){ echo 'checked'; }?>></span>
+														</div>
+														  Ответственный
+													  </label>
+													  <label for="closeButton">
+														<div class="checker" id="uniform-closeButton">
+															<span class="checked"><input  name="categor" id="closeButton" type="checkbox" value="checked"  class="input-small" <?php if(isset($_SESSION['contr_categor'])){ echo 'checked'; }?>></span>
+														</div>
+														  Категория
+													  </label>
+												
+													  <label for="closeButton">
+														<div class="checker" id="uniform-closeButton">
+															<span class="checked"><input  name="date" id="closeButton" type="checkbox" value="checked"  class="input-small" <?php if(isset($_SESSION['contr_date'])){ echo 'checked'; }?>></span>
+														</div>
+														  Дата создания
+													  </label>
+													  <label for="closeButton">
+														<div class="checker" id="uniform-closeButton">
+															<span class="checked"><input  name="status" id="closeButton" type="checkbox" value="checked"  class="input-small" <?php if(isset($_SESSION['contr_status'])){ echo 'checked'; }?>></span>
+														</div>
+														  Статус
+													  </label>
+													  <label for="closeButton">
+														<div class="checker" id="uniform-closeButton">
+															<span class="checked"><input  name="type" id="progressBar" type="checkbox" value="checked"  class="input-small" <?php if(isset($_SESSION['contr_type'])){ echo 'checked'; }?>></span>
+														</div>
+														  Истец/Ответчик/Агент
+													  </label>
+													 
+													  <label  for="progressBar">
+														  <div class="checker" id="progress-info">
+															  <span><input  name="avtor" id="progressBar" type="checkbox" value="checked" class="input-mini" <?php if(isset($_SESSION['contr_avtor'])){ echo 'checked'; }?>/></span>
+														  </div>
+														  Автор
+													  </label>
+													  <label  for="progressBar">
+														  <div class="checker" id="progress-info">
+															  <span><input name="task" id="progressBar" type="checkbox" value="checked" class="input-mini" <?php if(isset($_SESSION['contr_task'])){ echo 'checked'; }?>/></span>
+														  </div>
+														  Ближайшая задача
+													  </label>
+												  </div>
+                                              </div>
+											  <br/><br/><br/>
+                                              <div class="modal-footer">
+                                                  
+                                                  <button class="btn btn-warning" type="submit">Сохранить</button>
+                                              </div>
+                                              </form>   
+                                          </div>
+                                        
+
+                                      </div>
+                                  </div>
+                              </div>
+                <!-- modal Дополнительные настройки-->
+				
+                <a href="javascript:;" title="Распечатать таблицу" data-placement="bottom" data-toggle="tooltip " class="fa fa-print"></a>
+				<a href="javascript:;" title="Скачать в xls" data-placement="bottom" data-toggle="tooltip " class="fa fa-download"></a>
+				<button data-toggle="modal" href="#myModal4" class="btn btn-success btn-sm">Добавить контрагента</button>
+				
+				<!--Modal Добавить контрагента-->
+                              <div class="modal fade modal-dialog-center " id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog ">
+                                      <div class="modal-content-wrap">
+                                          <div class="modal-content">
+                                              <form action="?action=add_kontragent" method="post">
+                                                  <div class="modal-header">
+                                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                      <h4 class="modal-title">Новый контрагент</h4>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                        <br/>
+                                                        
+                                                        <br />
+                                                        <input name="contr_name" type="text"  class="form-control" placeholder="Наименование">
+                                                        <br/>
+                                                        <input name= "contr_phone" type="text"  class="form-control" placeholder="Телефон">
+                                                        <br/>
+                                                        <input name="contr_email" type="text"  class="form-control" placeholder="E-mail">
+                                                        <br/>
+                                                        <select name="contr_stage" class="form-control m-bot15">
+                                                        <?php
+                                                            $database = new database;
+                                                            $array_stages = $database->db_get_stage();
+                                                            
+                                                            foreach($array_stages as $stage)
+                                                            {
+                                                                print'<option value="'.$stage['stage_id'].'">'.$stage['stage_name'].'</option>';
+                                                            }
+                                                          
+                                                        ?>
+                                                        </select>
+                                                        
+                                                        <select name="contr_category" class="form-control m-bot15">
+                                                        <?php
+                                                            $database = new database;
+                                                            $array_categorys = $database->db_get_category();
+                                                            
+                                                            foreach($array_categorys as $category)
+                                                            {
+                                                                print'<option value="'.$category['categor_id'].'">'.$category['categor_name'].'</option>';
+                                                            }
+                                                          
+                                                        ?>
+                                                        </select>
+                                                       
+                                                        <select name="contr_status" class="form-control m-bot15">
+                                                        <?php
+                                                            $database = new database;
+                                                            $array_status = $database -> db_get_status();
+                                                            foreach($array_status as $status)
+                                                            {
+                                                                print'<option value="'.$status['status_name'].'">'.$status['status_name'].'</option>';
+                                                            }
+    
+                                                        ?>
+                                                        </select>
+                                                        <select name="contr_type" class="form-control m-bot15">
+                                                        <?php
+                                                            $database = new database;
+                                                            $array_types=$database->db_get_contr_type();
+                                                            foreach($array_types as $type)
+                                                            {
+                                                                print'<option value="'.$type['type_id'].'">'.$type['type_name'].'</option>';
+                                                            }
+                                                        ?>
+                                                        </select>
+                                                        
+                            
+           
+                                                        <br/>
+                                                        <textarea name ="contr_comment" class="wysihtml5 form-control" rows="10" placeholder="Описание"></textarea>
+                                                        <br/>
+                                                        <hr>
+                                                        
+                                                        <br>
+                                
+                                                           
+                                                                <select name = "task_name"  class="form-control" >
+                                                                    <option>Встреча</option>
+                                                                    <option>Звонок</option>
+                                                                    <option>Дело</option>
+                                                                    <option>Совещание</option>
+                                                                    <option>Вх звонок</option>
+                                                                    <option>Исх звонок</option>
+                                                                    <option>Личное</option>
+                                                                    <option>Корпоратив</option>
+                                                                    <option>Письмо</option>
+                                                                    <option>Заседание</option>
+                                                                </select>
+                                                               <br>
+                                                             <div class="col-md-4">
+
+                                                             <div class="input-group bootstrap-timepicker"  >
+
+                                                                <input type="text"  name="task_time" class="form-control timepicker-24">
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
+                                                                </span>
+                                                             </div>
+                                                             </div>
+                                                               <section id="container" class="">
+                                                              <div class="col-md-7">
+                                                              <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="<?php echo date('j-m-Y'); ?>"  class="input-append date dpYears">
+                                                                  <input name="task_date" type="text" readonly="" value="<?php echo date('j-m-Y'); ?>" size="16" class="form-control">
+                                                                      <span class="input-group-btn add-on">
+                                                                        <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
+                                                                      </span>
+                                                              </div>
+                                                               </div>
+                                                                 <textarea name ="task_comment" class="wysihtml5 form-control" placeholder="Описание задачи"></textarea>
+                                                               </section>
+                                        
+                                                        <br>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                      
+                                                      <button class="btn btn-warning" type="submit">Сохранить</button>
+                                                  </div>
+                                              </form>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                <!-- Modal Добавить -->
+				
+              </span>
+              </header>
+              <div class="panel-body">
+              <div class="adv-table">
+              <!-- <table class="display table table-bordered" id="hidden-table-info"> -->
+			  <table  class="display table table-bordered table-striped" id="dynamic-table">
+              <thead>
+                  <tr>
+                
+                      <?php
+                          
+                              
+                                empty($_SESSION['contr_id'])     ? '': print'<th>id</th>';
+                                empty($_SESSION['contr_name'])   ? '': print'<th>Наименование</th>';
+                                empty($_SESSION['contr_contact'])? '': print'<th>Контактные лица</th>';
+                                empty($_SESSION['contr_phone'])  ? '': print'<th>Телефон</th>';
+                                empty($_SESSION['contr_email'])  ? '': print'<th>E-mail</th>';
+                                empty($_SESSION['contr_otvet'])  ? '': print'<th>Ответственный</th>';
+                                empty($_SESSION['contr_categor'])? '': print'<th>Категория</th>';
+                                empty($_SESSION['contr_date'])   ? '': print'<th>Дата создания</th>'; 
+                                empty($_SESSION['contr_status']) ? '': print'<th>Статус</th>'; 
+                                empty($_SESSION['contr_type'])   ? '': print'<th>Тип</th>'; 
+                                empty($_SESSION['contr_avtor'])  ? '': print'<th>Автор</th>'; 
+                                empty($_SESSION['contr_task'])   ? '': print'<th>Ближайшая задача</th>'; 
+                            
+                      ?>
+                  </tr>
+               </thead>  
+               <tbody>
+                   
+            <!-- вытаскиваю все данные по контрагенту из БД --> 
+            <?php
+                $database = new database;
+                $array_contragents= $database -> db_get_contragent();
+                $array_contacts = $database -> db_get_contact();
+
+                foreach($array_contragents as $contragent) 
+                {
+                    $otvet   = $database ->db_get_username($contragent['contr_user_id']);     //получить имя и фамилию ответственного по 
+                    $categor = $database ->db_get_categorname($contragent['contr_category']); //получить имя категории по id
+                    $avtor   = $database ->db_get_username($contragent['contr_author']);      //получить имя и фамилию автора по id
+                    $task    = $database ->db_get_task_nearest_contragent_id($contragent['contr_id']); //задачу по id
+
+                    if(preg_match('~\s*Не выполнено\s*~u', $task))
+                    {
+                        $task = '<a style="color:#de5c5c">'.$task.'</a>';
+                    }
+                    elseif(preg_match('~\s*Просрочено\s*~u', $task))
+                    {
+                        $task = '<a style="color:#de5c5c">'.$task.'</a>';
+                    }
+
+                    
+                        print'<tr class="gradeX">';
+                                empty($_SESSION['contr_id'])     ? '': print'<td>'.$contragent['contr_id'] .'</th>';
+                                 empty($_SESSION['contr_name'])   ? '': print'
+                                <td>
+                                    <a  href="?location=kontragent_one&id='.$contragent['contr_id'].'" >'.$contragent['contr_name'] .'</a>
+                                </th>';
+                                
+                                if(!empty($_SESSION['contr_contact']))
+                                {
+                                    print'<td><div class="btn-group"><button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">Показать<span class="caret"></span></button><ul role="menu" class="dropdown-menu">';
+
+                                    foreach( $array_contacts as $contact)
+                                    {
+                                        if($contact['cont_contragent'] === $contragent['contr_id'])
+                                        {
+                                              print'<li><a href="?location=contact_one&id='.$contact['cont_id'].'">'.$contact['cont_fullname'].'</a></li>';            
+                                        }
+                                    }
+
+                                    print'</ul>
+                                    </div> 
+                                    </th>';
+                                }
+                              
+                                 empty($_SESSION['contr_phone'])  ? '': print'<td>'.$contragent['contr_phone'] .'</th>';
+                                 empty($_SESSION['contr_email'])  ? '': print'<td>'.$contragent['contr_email'] .'</th>';
+                                 empty($_SESSION['contr_otvet'])  ? '': print'<td>'.$otvet.'</th>';
+                                 empty($_SESSION['contr_categor'])? '': print'<td>'.$categor.'</th>';
+                                
+                                 empty($_SESSION['contr_date'])   ? '': print'<td>'.$contragent['contr_date_creation'].'</th>'; 
+                                 empty($_SESSION['contr_status']) ? '': print'<td>'.$contragent['contr_status'].'</th>'; 
+                                 empty($_SESSION['contr_type'])   ? '': print'<td>'.$contragent['contr_type'].'</th>'; 
+                                 empty($_SESSION['contr_avtor'])  ? '': print'<td>'.$avtor.'</th>'; 
+                                 
+                                 empty($_SESSION['contr_task'])   ? '': print'<td>'.$task.'</th>'; 
+                        print'</tr>';
+                    
+                }
+                ?>
+                       
+                                      
+                                     
+                                     
+                                  
+                 
+              </tbody>
+              </table>
+              </div>
+              </div>
+              </section>
+              </div>
+              </div>
+              <!-- page end-->
+          </section>
+      </section>
+      <!--main content end-->
+	  <br/><br/><br/><br/><br/><br/><br/><br/>
+      <!--footer start-->
+      <footer class="site-footer">
+          <div class="text-center">
+              2015 &copy; CRM by Mandryka.
+              <a href="#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+      <!--footer end-->
+  </section>
+ <!-- js placed at the end of the document so the pages load faster -->
+   
+    <script src="views/js/jquery.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+      <!--right slidebar-->
+    <script src="views/js/slidebars.min.js"></script>
+
+  
+    <!--this page  script only-->
+    <script src="views/js/advanced-form-components.js"></script>
+    <!-- js placed at the end of the document so the pages load faster -->
+
+    <script src="views/js/jquery.js"></script>
+    <script src="views/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="views/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="views/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="views/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="views/js/jquery.scrollTo.min.js"></script>
+    <script src="views/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript" src="views/assets/advanced-datatable/media/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="views/assets/data-tables/DT_bootstrap.js"></script>
+    <script src="views/js/respond.min.js" ></script>
+      
+
+    <!--right slidebar-->
+    <script src="views/js/slidebars.min.js"></script>
+
+    <!--dynamic table initialization -->
+    <script src="views/js/dynamic_table_init.js"></script>
+
+
+    <!--common script for all pages-->
+    <script src="views/js/common-scripts.js"></script>
+      
+     <script type="text/javascript" src="views/assets/fuelux/js/spinner.min.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-daterangepicker/moment.min.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+    <script src="views/js/advanced-form-components.js"></script>
+
+  </body>
+</html>

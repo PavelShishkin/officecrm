@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Отступы между ячейками — Знакомство с таблицами — Курсы — HTML Academy</title>
+    <meta name="keywords" content="" >
+<meta name="description" content="" >
+    <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@htmlacademy_ru">
+<meta name="twitter:image" content="https://htmlacademy.ru/static/img/og/course/5.png">
+<meta property="fb:app_id" content="144426935714125">
+<meta property="og:site_name" content="HTML Academy">
+<meta property="og:type" content="htmlacademy:course">
+<meta property="og:url" content="https://htmlacademy.ru/courses/39">
+<meta property="og:title" itemprop="name" content="Знакомство с таблицами">
+<meta property="og:description" itemprop="description" content="Научимся создавать таблицы любых размеров, объединять ячейки и красиво оформлять таблицы с помощью стилей.">
+<meta property="og:image" itemprop="image" content="https://htmlacademy.ru/static/img/og/course/5.png">
+    <!--[if lt IE 9]><script src="/themes/htmlacademy/js/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700&subset=latin,cyrillic">
+    <link rel="stylesheet" href="/themes/htmlacademy/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/themes/htmlacademy/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/themes/htmlacademy/css/style.min.34.css">
+    <script src="/themes/htmlacademy/js/jquery-1.7.1.min.js"></script>
+    <script src="/themes/htmlacademy/js/bootstrap.js"></script>
+    <script src="/themes/htmlacademy/js/scripts.min.42.js"></script>
+    <meta name="theme-color" content="#2f358f">
+    <link rel="mask-icon" href="/favicon.svg" color="#2f358f">
+    <link rel="manifest" href="/htmlacademy.webmanifest">
+    <meta name="application-name" content="HTML Academy">
+    <meta name="apple-mobile-web-app-title" content="HTML Academy">  </head>
+  <body>
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MM92BM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){ w[l]=w[l]||[];w[l].push({ 'gtm.start':new Date().getTime(),event:'gtm.js' });var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-MM92BM');</script>
+    <div class="ha-inner-header">
+      <div class="ha-container ha-inner-container">
+        <div class="ha-header-logo"><a href="/"><img src="/static/img/htmlacademy.svg" width="116" height="41" alt="HTML Academy"></a></div>
+        <div class="ha-course-nav"><a href="/courses/39">Знакомство с таблицами</a> <span class="divider">/</span> Отступы между ячейками <span class="task-number">[8/23]</span></div>
+        <ul class="ha-header-profile">
+                <li><a href="/login">Вход</a></li>
+                <li><a href="/signup">Регистрация</a></li>
+            </ul>
+      </div>
+    </div>    <div class="container ha-page-min-height">
+      <div class="b-simple-task ha-quest-task" >
+    <div class="row">
+        <div class="span12">
+            <div class="ha-task-description-popup">
+                <div class="ha-task-description">
+                    <span class="close ha-task-description-close">&times;</span>
+                    <div class="course">Курс &laquo;<a href="/courses/39">Знакомство с таблицами</a>&raquo;</div>
+                    <h1>Отступы между ячейками <small>[8/23]</small></h1>
+                    <p>Большинство задач по&nbsp;оформлению таблиц решаются с&nbsp;помощью работы с&nbsp;рамками, отступами внутри ячеек, изменения цвета фона ячеек.</p>
+
+<p>Помимо внутренних отступов можно задавать отступы между ячейками таблицы.</p>
+
+<p>Отступы между ячейками не&nbsp;работают с <code>border-collapse: collapse</code>, что достаточно логично, ведь рамки ячеек в&nbsp;этом режиме &laquo;склеены&raquo; и&nbsp;их&nbsp;не&nbsp;разорвать.</p>
+
+<p>Поэтому в&nbsp;этом задании мы&nbsp;используем <code>border-collapse: separate</code>, которое &laquo;расклеивает&raquo; ячейки. На&nbsp;самом деле это значение по&nbsp;умолчанию, а&nbsp;мы&nbsp;используем его только для наглядности. Если удалить свойство <code>border-collapse</code>, то&nbsp;результат не&nbsp;изменится, ячейки будут отображаться раздельно.</p>
+
+<p>Отступы между ячейками можно задать:</p>
+
+<ul>
+  <li><p>с&nbsp;помощью атрибута <code>cellspacing</code> тега <code>&lt;table&gt;</code></p></li>
+  <li><p>или c&nbsp;помощью CSS-свойства <code>border-spacing</code>.</p></li>
+</ul>
+
+<p>Отметим, что свойство <code>border-spacing</code> задаётся для таблицы, в&nbsp;отличие от <code>padding</code>, которое задаётся для ячеек.</p>                    <hr>
+                    <span class="btn ha-task-description-close">Выполнить задание</span>
+                </div>
+            </div>
+            <div class="ha-task-description-overlay"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span6">
+            <div class="editor-container shadow-box">
+    <span class="label label-info editor-label">HTML</span>
+    <div class="editor" id="html-editor">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;Отступы между ячейками&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Распределение браузеров&lt;/h1&gt;
+
+        &lt;table cellspacing=&quot;3&quot;&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Браузер&lt;/td&gt;
+                &lt;td&gt;Посещения&lt;/td&gt;
+                &lt;td&gt;Доля&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Mozilla Firefox&lt;/td&gt;
+                &lt;td&gt;163&lt;/td&gt;
+                &lt;td&gt;59%&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Google Chrome&lt;/td&gt;
+                &lt;td&gt;78&lt;/td&gt;
+                &lt;td&gt;28%&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;Safari&lt;/td&gt;
+                &lt;td&gt;35&lt;/td&gt;
+                &lt;td&gt;13%&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+
+    &lt;/body&gt;
+&lt;/html&gt;</div>
+</div>
+            <div class="editor-container shadow-box">
+    <span class="label label-info editor-label">CSS</span>
+    <div  class="editor" id="css-editor">table {
+    border-collapse: separate;
+    border: 3px solid black;
+}
+
+td {
+    border: 2px solid lightgray;
+    padding: 5px;
+}</div>
+</div>
+        </div>
+        <div class="span6 browser-column">
+            <div class="browser-container shadow-box">
+                <div class="tab">HTML Academy</div>
+                <iframe class="browser" id="preview" src="/blank.html"></iframe>
+                <div class="ha-task-goals">
+                    <span class="btn ha-goals-position-toggle" title="Переместить задачи"><i class="icon-arrow-up"></i></span>
+                     <ol>
+  <li id="goal1">В&nbsp;HTML-редакторе измените значение атрибута <code>cellspacing</code> на <code>5</code>.</li>
+  <li id="goal2">Затем удалите этот атрибут.</li>
+  <li id="goal3">В&nbsp;CSS-редакторе для <code>table</code> добавьте свойство <code>border-spacing: 5px;</code>.</li>
+</ol>
+                </div>
+                <div class="ha-task-controls">
+                    <span class="btn ha-task-description-toggle"><i class="icon-font"></i> Теория</span>
+                    <span id="server-check" class="btn"><i class="icon-check"></i> <span>Проверить</span></span>
+                    <a id="next-task" class="btn disabled ha-next-task" href="/courses/39/run/9"> Следующее задание</a>
+                </div>
+            </div>
+            <div class="task-notification">
+  Идёт запись на тринадцатый <a href="/intensive/htmlcss">базовый онлайн-интенсив</a>, который стартует 11 апреля.
+</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <hr>
+    <div class="span8">
+        <div id="hypercomments_widget"></div>
+<script type="text/javascript">
+_hcwp = window._hcwp || [];
+_hcwp.push({ widget:"Stream", widget_id: 8140 });
+(function() {
+if("HC_LOAD_INIT" in window)return;
+HC_LOAD_INIT = true;
+var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage ||  "en").substr(0, 2).toLowerCase();
+var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/8140/"+lang+"/widget.js";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hcc, s.nextSibling);
+})();
+</script>
+<a href="http://hypercomments.com" class="hc-link" rel="nofollow" target="_blank">comments powered by HyperComments</a>
+    </div>
+    <div class="span4">
+        <div class="alert">
+            <p><strong>Обсуждение</strong></p>
+            <p>Если у&nbsp;вас возникли сложности при прохождении задания, то&nbsp;вы&nbsp;можете обратиться за&nbsp;помощью на&nbsp;наш форум. Мы&nbsp;отслеживаем сообщения и&nbsp;постараемся ответить максимально быстро.</p>
+            <p>Пожалуйста, не&nbsp;пишите решение задач. Такие сообщения будут удаляться.</p>
+            <p><a href="https://discuss.htmlacademy.ru/c/kursy/5-znakomstvo-s-tabliczami" target="_blank">Перейти на&nbsp;форум.</a></p>
+        </div>
+    </div>
+</div>
+<script src="/js/ace1.2.0/ace.js"></script>
+<script src="/js/ace1.2.0/mode-html.js"></script>
+<script src="/js/ace1.2.0/mode-css.js"></script>
+<script src="/js/prefixfree.min.js"></script>
+<script src="/js/ace-editor-movie/aceEditorMovie.min.5.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    var taskProcessor = new TaskProcessor(3);
+    taskProcessor.checkGoal1 = function() {
+        if ($('table:first', this.getPreviewDocument()).attr('cellspacing') == '5') {
+            return true;
+        }
+        return false;
+    }
+    taskProcessor.checkGoal2 = function() {
+        var cellspacingAttr = $('table:first', this.getPreviewDocument()).attr('cellspacing');
+        if (typeof cellspacingAttr == 'undefined' || !cellspacingAttr) {
+            return true;
+        }
+        return false;
+    }
+    taskProcessor.checkGoal3 = function() {
+        var cellspacingAttr = $('table:first', this.getPreviewDocument()).attr('cellspacing');
+        if (!(typeof cellspacingAttr == 'undefined' || !cellspacingAttr)) {
+            return false;
+        }
+        if ($('table:first', this.getPreviewDocument()).css('border-spacing') == '5px 5px') {
+            return true;
+        }
+        return false;
+    }
+    HtmlacademyTask.setTaskProcessor(taskProcessor);
+
+    var taskAnswers = [
+      {
+        goal: 1,
+        editor: 'html',
+        data: {
+          tooltip: 'Изменим значение атрибута <code>cellspacing</code>.',
+          actions: [
+            {
+              action: 'replace',
+              cursorPosition: {row: 9, column: 28},
+              from: '3',
+              to: '5'
+            }
+          ]
+        }
+      },
+      {
+        goal: 2,
+        editor: 'html',
+        data: {
+          tooltip: 'Теперь удалим этот атрибут.',
+          actions: [
+            {
+              action: 'delete',
+              cursorPosition: {row: 9, column: 15},
+              from: 'cellspacing="5"'
+            }
+          ]
+        }
+      },
+      {
+        goal: 3,
+        editor: 'css',
+        data: {
+          tooltip: 'Добавим <code>border-spacing</code> в CSS для таблицы.',
+          actions: [
+            {
+              action: 'addLine',
+              cursorPosition: {row: 3, column: 4},
+              to: 'border-spacing: 5px;'
+            }
+          ]
+        },
+      }
+    ];
+
+    HtmlacademyTask.addAnswers(taskAnswers);
+});
+</script>
+    </div>
+    <div class="ha-footer ha-footer-alone">
+      <div class="ha-container ha-inner-container">
+        <div class="ha-layout-1-3">
+          <div class="footer-logo">
+            <a href="https://htmlacademy.ru"><img src="/static/img/htmlacademy.svg" width="130" height="44" alt="HTML Academy"></a>
+          </div>
+
+          <a class="ha-social" href="https://vk.com/htmlacademy" target="_blank" title="ВКонтакте">В</a>
+          <a class="ha-social" href="https://www.facebook.com/htmlacademy" target="_blank" title="Facebook">f</a>
+          <a class="ha-social" href="https://twitter.com/htmlacademy_ru" target="_blank" title="Twitter">T</a>
+
+          <span class="ha-copy">&copy; 2016 HTML Academy</span>
+        </div>
+        <div class="ha-layout-2-3">
+          <div class="ha-footer-list">
+            <div class="ha-footer-list-block">
+              <h3>Обучение</h3>
+              <a href="/learn_map">Карта обучения</a><br>
+              <a href="/courses">Курсы</a><br>
+              <a href="/intensive/htmlcss">Интенсив</a><br>
+              <a href="/pricing">Подписка</a><br>
+              <a href="/rating">Рейтинг</a>
+            </div>
+            <div class="ha-footer-list-block">
+              <h3>Компания</h3>
+              <a href="/about">О нас</a><br>
+              <a href="/blog">Блог</a><br>
+              <a href="https://discuss.htmlacademy.ru">Форум</a><br>
+              <a href="https://shop.htmlacademy.ru">Магазин</a>
+            </div>
+            <div class="ha-footer-list-block">
+              <h3>Контакты</h3>
+              <a href="/contacts">Написать нам</a><br>
+              <a href="/email">Рассылка</a>
+            </div>
+            <br clear="both">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="achievment-notification"><div class="notification-container"></div></div>    <script src="//yandex.st/share/share.js" async></script>  </body>
+</html>

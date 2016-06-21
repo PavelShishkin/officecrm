@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<title>Monsta FTP v1.4.6</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<link href="skins/monsta.css" rel="stylesheet" type="text/css">
+<link href="/cm/lib/codemirror.css" rel="stylesheet" type="text/css">
+<link href="/cm/addon/hint/show-hint.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-Frame-Options" content="sameorigin">
+</head>
+<body>
+<form method="post" action="?" enctype="multipart/form-data" name="ftpActionForm" id="ftpActionForm">
+<div id="ftpActionButtonsDiv">
+<input type="button" value="Обновить" onClick="refreshListing()" class="inputButton">
+<input type="button" id="actionButtonCut" value="Вырезать" onClick="actionFunctionCut('','');" disabled class="inputButton" style="display: none">
+<input type="button" id="actionButtonCopy" value="Копировать" onClick="actionFunctionCopy('','');" disabled class="inputButton" style="display: none">
+<input type="button" id="actionButtonPaste" value="Вставить" onClick="actionFunctionPaste('');" disabled class="inputButton" style="display: none">
+<input type="button" id="actionButtonRename" value="Переименовать" onClick="actionFunctionRename('','');" disabled class="inputButtonNf">
+<input type="button" id="actionButtonDelete" value="Удалить" onClick="actionFunctionDelete('','');" disabled class="inputButton">
+<div class="floatRight">
+<input type="button" value="Выход" onClick="actionFunctionLogout();" class="inputButton">
+</div>
+</div>
+<div id="ajaxContentWindow" onContextMenu="displayContextMenu(event,'','',1)" onClick="unselectFiles()">
+<select onChange="openThisFolder(this.options[this.selectedIndex].value,1)" id="ftpHistorySelect">
+<option value="~">/</option><option value="~%2Fpublic_html" selected>/public_html</option><option value="~%2Ftmp">/tmp</option></select>
+<table width="100%" cellpadding="7" cellspacing="0" id="ftpTable"><tr><td width="16" class="ftpTableHeadingNf"><input type="checkbox" id="checkboxSelector" onClick="checkboxSelectAll()"></td><td width="16" class="ftpTableHeadingNf"></td><td class="ftpTableHeading"><span onclick="processForm('&ftpAction=openFolder&openFolder=~%2Fpublic_html&sort=n&ord=desc')" class="cursorPointer">Имя файла</span></td><td width="10%" class="ftpTableHeading"><span onclick="processForm('&ftpAction=openFolder&openFolder=~%2Fpublic_html&sort=s&ord=desc')" class="cursorPointer">Размер</span></td><td width="10%" class="ftpTableHeading"><span onclick="processForm('&ftpAction=openFolder&openFolder=~%2Fpublic_html&sort=d&ord=desc')" class="cursorPointer">Дата</span></td><td width="10%" class="ftpTableHeading"><span onclick="processForm('&ftpAction=openFolder&openFolder=~%2Fpublic_html&sort=t&ord=desc')" class="cursorPointer">Время</span></td></tr><tr><td width="16"></td><td width="16"><img src="images/icon_16_folder.gif" width="16" height="16"></td><td colspan="4"><div class="width100pc" onDragOver="dragFile(event); selectFile('folder0',0);" onDragLeave="unselectFolder('folder0')" onDrop="dropFile('~')"><a href="#" id="folder0" draggable="false" onClick="openThisFolder('~',1)">...</a></div></td></tr><tr class="trBg0"><td><input type="checkbox" name="fileAction[]" value="~%2Fpublic_html%2F1.php" onclick="checkFileChecked()"></td><td><img src="images/icon_16_file.gif" width="16" height="16"></td><td><a href="#" id="file1" target="ajaxIframe" onContextMenu="selectFile(this.id,1); displayContextMenu(event,'~%2Fpublic_html%2F1.php','',1)" onClick="selectFile(this.id,1); displayContextMenu(event,'~%2Fpublic_html%2F1.php','',1)" draggable="true" onDragStart="selectFile(this.id,1); setDragFile('~%2Fpublic_html%2F1.php','')">1.php</a></td><td>0</td><td>12/02/16</td><td>18:59</td></tr></table></div>
+<iframe name="ajaxIframe" id="ajaxIframe" width="0" height="0" frameborder="0" style="visibility: hidden; display: none;"></iframe>
+<div id="uploadProgressDiv" style="visibility:hidden; display:none">
+<table width="100%" cellpadding="7" cellspacing="0" id="uploadProgressTable">
+<tr>
+<td class="ftpTableHeadingNf" width="1%"></td>
+<td class="ftpTableHeading" size="35%">Файл</td>
+<td class="ftpTableHeading" width="7%">Размер</td>
+<td class="ftpTableHeading" width="21%">Состояние</td>
+<td class="ftpTableHeading" width="9%">Прошло времени</td>
+<td class="ftpTableHeading" width="7%">Загружено на сервер</td>
+<td class="ftpTableHeading" width="9%">Скорость загрузки</td>
+<td class="ftpTableHeading" width="10%">Осталось времени</td>
+<td class="ftpTableHeading" width="1%"></td>
+</tr>
+</table>
+</div>
+<div id="footerDiv">
+<div id="hostInfoDiv">
+ 
+<span>Пользователь:</span> office_fl8_ru  
+   
+</div>
+<div class="floatLeft10">
+<input type="button" value="Новая папка" onClick="processForm('&ftpAction=newFolder')" class="inputButton">
+</div>
+<div class="floatLeft10">
+<input type="button" value="Новый файл" onClick="processForm('&ftpAction=newFile', function(){ setTimeout(cmInit, 8000); })" class="inputButton">
+</div>
+<div id="uploadButtonsDiv"><div>
+</div>
+﻿<script type="text/javascript">
+var lang_no_xmlhttp = 'Ваш браузер не поддерживает XMLHTTP!';
+var lang_support_drop = 'Ваш браузер поддерживает Drag & Drop';
+var lang_no_support_drop = 'Поддержка Drag & Drop отсутствует';
+var lang_transfer_pending = 'Ожидание';
+var lang_transferring_to_ftp = 'Загрузка на FTP сервер...';
+var lang_no_file_selected = 'Нажмите кнопку Обзор и выберите файл для загрузки!';
+var lang_none_selected = 'Выберите хотя бы один файл или папку!';
+var lang_context_open = 'Открыть';
+var lang_context_download = 'Скачать';
+var lang_context_edit = 'Редактировать';
+var lang_context_cut = 'Вырезать';
+var lang_context_copy = 'Копировать';
+var lang_context_paste = 'Вставить';
+var lang_context_rename = 'Переименовать';
+var lang_context_delete = 'Удалить';
+var lang_context_chmod = 'Права доступа';
+var lang_context_unzip = 'Распаковать';
+var lang_size_b = ' Б';
+var lang_size_kb = ' КБ';
+var lang_size_mb = ' МБ';
+var lang_size_gb = ' ГБ';
+var lang_btn_upload_file = 'Загрузить файл';
+var lang_btn_upload_files = 'Загрузить файлы';
+var lang_btn_upload_repeat = 'Повторить загрузку';
+var lang_btn_upload_folder = 'Загрузить папку';
+var lang_file_size_error = 'Размер файла превышает допустимое значение';
+
+var ftpuser = 'office_fl8_ru';
+var upload_limit = '134217728';
+</script>
+<script type="text/javascript" src="ajax.js?v2"></script>
+<script src="/cm/lib/codemirror.js"></script>
+<script src="/cm/addon/edit/closetag.js"></script>
+<script src="/cm/addon/fold/xml-fold.js"></script>
+<script src="/cm/mode/xml/xml.js"></script>
+<script src="/cm/mode/javascript/javascript.js"></script>
+<script src="/cm/mode/css/css.js"></script>
+<script src="/cm/mode/htmlmixed/htmlmixed.js"></script>
+<script src="/cm/mode/ruby/ruby.js"></script>
+<script src="/cm/mode/haml/haml.js"></script>
+<script src="/cm/mode/sass/sass.js"></script>
+<script src="/cm/mode/coffeescript/coffeescript.js"></script>
+<script src="/cm/mode/markdown/markdown.js"></script>
+<script src="/cm/mode/yaml/yaml.js"></script>
+<script src="/cm/mode/sql/sql.js"></script>
+<script src="/cm/addon/edit/matchbrackets.js"></script>
+<script src="/cm/mode/clike/clike.js"></script>
+<script src="/cm/mode/php/php.js"></script>
+<script src="/cm/addon/hint/show-hint.js"></script>
+<script src="/cm/addon/hint/html-hint.js"></script>
+<script src="/cm/addon/hint/javascript-hint.js"></script>
+<script src="/cm/addon/hint/css-hint.js"></script>
+<script src="/cm/addon/hint/sql-hint.js"></script>
+<script src="/cm/addon/edit/matchtags.js"></script>
+<script src="/cm/addon/edit/matchbrackets.js"></script>
+<script src="/cm/addon/comment/comment.js"></script>
+<script src="/cm/addon/comment/continuecomment.js"></script>
+<div id="contextMenu" style="visibility: hidden; display: none;"></div>
+<div id="indicatorDiv" style="z-index: 1; visibility: hidden; display: none"><img src="images/indicator.gif" width="32" height="32" border="0"></div>
+</form>
+<script type="text/javascript">
+var editableExts = new Array();
+editableExts[0] = 'css';
+editableExts[1] = 'html';
+editableExts[2] = 'htm';
+editableExts[3] = 'js';
+editableExts[4] = 'php';
+editableExts[5] = 'phtml';
+editableExts[6] = 'pl';
+editableExts[7] = 'txt';
+editableExts[8] = 'xhtml';
+editableExts[9] = 'md';
+editableExts[10] = 'sql';
+editableExts[11] = 'haml';
+editableExts[12] = 'scss';
+editableExts[13] = 'sass';
+editableExts[14] = 'less';
+editableExts[15] = 'coffee';
+editableExts[16] = 'tpl';
+editableExts[17] = 'yml';
+editableExts[18] = 'xml';
+editableExts[19] = 'json';
+editableExts[20] = 'inc';
+editableExts[21] = 'htaccess';
+</script>
+</body>
+</html>

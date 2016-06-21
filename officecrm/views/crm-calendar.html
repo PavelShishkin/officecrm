@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>Задачи</title>
+<link rel="stylesheet" type="text/css" href="views/assets/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="views/assets/bootstrap-timepicker/compiled/timepicker.css" />
+    <!-- Bootstrap core CSS -->
+    <link href="views/css/bootstrap.min.css" rel="stylesheet">
+    <link href="views/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="views/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="views/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+      <!--right slidebar-->
+      <link href="views/css/slidebars.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="views/css/style.css" rel="stylesheet">
+    <link href="views/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  <style>
+   td {padding: 5px; /* Поля вокруг текста */ }
+  </style>
+  </head>
+
+  <body>
+
+     <section id="container" class="">
+      <?php include $user ?>
+      <?php include $aside ?>
+    
+
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!-- page start-->
+              <div class="row">
+                  <!--
+                  <aside class="col-lg-3">
+                      <h4 class="drg-event-title">Запланировать задачу</h4>
+                      <div id='external-events'>
+                          <div class='external-event label label-primary'>Встреча</div>
+                          <div class='external-event label label-success'>Звонок</div>
+                          <div class='external-event label label-info'>Дело</div>
+                          <div class='external-event label label-inverse'>Совещание</div>
+                          <div class='external-event label label-warning'>Вх звонок</div>
+                          <div class='external-event label label-danger'>Исх звонок</div>
+                          <div class='external-event label label-default'>Личное</div>
+                          <div class='external-event label label-primary'>Корпоратив</div>
+                          <div class='external-event label label-info'>Письмо</div>
+                          <div class='external-event label label-success'>Заседание</div>
+                          
+                          <p class="border-top drp-rmv"></p> 
+                              
+                              <a href="?location=calendar" class="btn btn-danger">Все зададачи</a>
+                              <br>
+                              <br>
+                              <a href="?location=calendar&status=contact" class="btn btn-danger">Контакты</a>
+                              <br>
+                              <br>
+                              <a href="?location=calendar&status=contragent" class="btn btn-danger">Контрагенты</a>
+                             
+                            
+                              
+                           
+                          <p class="border-top drp-rmv">
+                              <input type='checkbox' id='drop-remove' />
+                              remove after drop
+                          </p>
+                          
+                      </div>
+                  </aside>
+                  -->
+                 <aside class="col-lg-12">
+                      <section class="panel">
+                          <div class="panel-body">
+                              <table >
+                                  <tr >
+                                    <td>
+                                        <a href="?location=calendar" class="btn btn-danger">Все задачи</a>
+                                    </td>
+                                    <td >
+                                        <a href="?location=calendar&status=my_task" class="btn btn-danger">Мои задачи</a>
+                                    </td>
+                                    <td >
+                                        <a href="?location=calendar&status=all_contact" class="btn btn-danger">Все контакты</a>
+                                    </td>
+                                    <td >
+                                        <a href="?location=calendar&status=all_contragent" class="btn btn-danger">Все контрагенты</a>
+                                    </td>
+                                    <td>
+                                      <select class="form-control" onchange="location = this.options[this.selectedIndex].value;">
+                                         <option>Выбрать контрагента</option>
+                                         <?php
+                                            $database = new database;
+                                            $array_contragents= $database->db_get_contragent();
+
+                                            foreach($array_contragents as $contragent) 
+                                            {
+                                                print'
+                                                <option value="?location=calendar&status=contragent_one&id='.$contragent['contr_id'].'">
+                                                    '.$contragent['contr_name'].'
+                                                </option>';
+                                            }
+                                          ?>
+                                      </select>
+                                    </td>
+                                    <td>
+                                      <select class="form-control" onchange="location = this.options[this.selectedIndex].value;">
+                                            <option>Выбрать контакт</option>
+                                             <?php
+                                                $array_contacts = $database->db_get_contact();
+
+                                                foreach($array_contacts as $contact) 
+                                                {
+                                                  print'
+                                                  <option value="?location=calendar&status=contact_one&id='.$contact['cont_id'].'">
+                                                  '.$contact['cont_fullname'].
+                                                  '</option>';
+                                                }
+                                              ?>
+                                      </select>
+                                    </td>
+                                    <td>
+                                      <select class="form-control" onchange="location = this.options[this.selectedIndex].value;">
+                                            <option>Выбрать юриста</option>
+                                             <?php
+                                                $array_users = $database->db_get_user();
+                      
+                                                foreach($array_users as $user) 
+                                                {
+                                                    if($user['user_type'] === '3')
+                                                    {
+                                                    print'
+                                                    <option value="?location=calendar&status=user_one&id='.$user['user_id'].'">
+                                                    '.$user['user_name'].' '.$user['user_lastname'].'
+                                                    </option>';
+                                                    }
+                                                }
+                                              ?>
+                                      </select>
+                                    </td>
+                                  </tr>
+                             </table>
+                          </div>
+                     </section>
+                  </aside>
+                  <aside class="col-lg-12">
+                      <section class="panel">
+                          <div class="panel-body">
+                              
+                                <div id="calendar" class="has-toolbar"></div>
+                             
+                          </div>
+                      </section>
+                  </aside>
+              </div>
+              <!-- page end-->
+          </section>
+      </section>
+      <!--main content end-->
+     
+  </section>
+      
+ <!--
+  <?php if(isset($_GET['task_id'])){ echo "<body onLoad=" . "document.getElementById("."'sbm'".").click()>";} ?>
+              <a id="sbm" href="#myModal3" style="color: #000;text-decoration:none;" data-toggle="modal"></a>
+                  <!--Modal 3 редактировать задачу-->
+                            <!--
+                            <form action="?location=task_update&header=kontragent_one&id=<?= $_GET['id']?>&task_id=<?= $_GET['task_id'] ?>" method="post">
+                              <div class="modal fade modal-dialog-center " id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog ">
+                                      <div class="modal-content-wrap">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                  <h4 class="modal-title">Редактировать задачу</h4>
+                                              </div>
+                                              <input type="hidden" name="task_contragent_id"  value="<?= $_GET['id']?>">
+                                              <?php 
+                                                        $database = new database;
+                                                        
+                                                        if(isset($_GET['task_id']))
+                                                        {
+                                                            $array_task = $database -> db_get_task_id($_GET['task_id']);
+                                                        }
+                                                        
+                                                        foreach($array_task as $task){
+                                                    ?>
+                                              <div class="modal-body">
+                                                    
+													<br/>
+                                                    
+													<select name="task_name" class="form-control">
+                                                        <?php
+                                                        if($task['task_name'] === 'Встреча')
+                                                        {
+                                                            print'<option selected value="Встреча">Встреча</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Встреча">Встреча</option>';
+                                                        }
+                                                        
+                                                        if($task['task_name'] === 'Звонок')
+                                                        {
+                                                            print'<option selected value="Звонок">Звонок</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Звонок">Звонок</option>';
+                                                        }
+    
+                                                        if($task['task_name'] === 'Дело')
+                                                        {
+                                                            print'<option selected value="Дело">Дело</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Дело">Дело</option>';
+                                                        }
+
+                                                        if($task['task_name'] === 'Совещание')
+                                                        {
+                                                            print'<option selected value="Совещание">Совещание</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Совещание">Совещание</option>';
+                                                        }
+    
+                                                        if($task['task_name'] === 'Вх звонок')
+                                                        {
+                                                            print'<option selected value="Вх звонок">Вх звонок</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Вх звонок">Вх звонок</option>';
+                                                        }
+
+                                                        if($task['task_name'] === 'Исх звонок')
+                                                        {
+                                                            print'<option selected value="Исх звонок">Исх звонок</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Исх звонок">Исх звонок</option>';
+                                                        }
+
+                                                        if($task['task_name'] === 'Личное')
+                                                        {
+                                                            print'<option selected value="Личное">Личное</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Личное">Личное</option>';
+                                                        }
+
+                                                        if($task['task_name'] === 'Корпоратив')
+                                                        {
+                                                            print'<option selected value="Корпоратив">Корпоратив</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Корпоратив">Корпоратив</option>';
+                                                        }
+
+
+                                                        if($task['task_name'] === 'Письмо')
+                                                        {
+                                                            print'<option selected value="Письмо">Письмо</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Письмо">Письмо</option>';
+                                                        }
+    
+                                                        if($task['task_name'] === 'Заседание')
+                                                        {
+                                                            print'<option selected value="Заседание">Заседание</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Заседание">Заседание</option>';
+                                                        }
+
+                                                        if($task['task_name'] === 'Выполнено')
+                                                        {
+                                                            print'<option selected value="Выполнено">Выполнено</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Письмо">Выполнено</option>';
+                                                        }
+
+
+                                                        if($task['task_name'] === 'Не выполнено')
+                                                        {
+                                                            print'<option selected value="Не выполнено">Не выполнено</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Не выполнено">Не выполнено</option>';
+                                                        }
+                                                     
+                                                        ?>
+                                                    </select>
+													<br/>
+                                                 
+                                                    <div class="col-md-4">  
+                                                    <div class="input-group bootstrap-timepicker"  >                                      
+                                                        <input type="text"  value="<?= $task['task_time'] ?>" name="task_time"  class="form-control timepicker-24">
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
+                                                        </span>
+                                                    </div>
+                                                  </div>
+                                                  
+                                                  <div class="col-md-7">
+                                                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="<?php echo date('Y-m-j'); ?>"  class="input-append date dpYears">
+                                                         
+                                                    <input name="task_date" type="text"  readonly=""  value="<?= $task['task_date'] ?>"   class="form-control">
+                                                        
+                                                        <span class="input-group-btn add-on" >
+                                                            <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
+                                                        </span>
+                                                    </div>
+                                                  </div>
+                                       
+                                       
+													<br/>
+                                                    <textarea name="task_comment" class="wysihtml5 form-control" rows="5" placeholder="Описание"> <?= $task['task_comment'] ?> </textarea>
+                                                     <br/>
+								                    <?}?>
+                                              
+                                                  <input class="btn btn-warning" type="submit" value="сохранить">
+                                                
+                                          </div>
+                                          
+                                      </div>
+                                  </div>
+                              </div>
+                                </div>
+                                
+                            </form>
+                <!-- Modal редактирвать задачу -->      
+                                 
+
+
+
+    
+  <!-- js placed at the end of the document so the pages load faster -->
+  <script src="views/js/jquery.js"></script>
+  <script type="text/javascript" src="views/js/jquery-ui-1.9.2.custom.min.js"></script>
+  <script src="views/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
+  <script src="views/js/bootstrap.min.js"></script>
+  <script class="include" type="text/javascript" src="views/js/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="views/js/jquery.scrollTo.min.js"></script>
+  <script src="views/js/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="views/js/respond.min.js" ></script>
+
+  <!--right slidebar-->
+  <script src="views/js/slidebars.min.js"></script>
+
+  <!--common script for all pages-->
+  <script src="views/js/common-scripts.js"></script>
+      
+
+    
+  <!--script for this page only-->
+  <script src="views/js/external-dragging-calendar.js.php?status=<?php echo $status ?>&id=<?php echo $_GET['id'] ?>"></script>
+   
+   <!-- js placed at the end of the document so the pages load faster -->
+    
+    <script type="text/javascript" src="views/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <!--right slidebar-->
+    <script src="views/js/slidebars.min.js"></script>
+    <!--this page  script only-->
+     <script type="text/javascript" src="views/assets/fuelux/js/spinner.min.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-daterangepicker/moment.min.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+    <script src="views/js/advanced-form-components.js"></script>
+     
+
+  </body>
+</html>

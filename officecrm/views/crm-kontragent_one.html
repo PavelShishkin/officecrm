@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="views/img/favicon.png">
+ 
+    <title>Контрагент</title>
+     
+      
+    <!-- Bootstrap core CSS -->
+    <link href="views/css/bootstrap.min.css" rel="stylesheet">
+    <link href="views/css/bootstrap-reset.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="views/assets/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="views/assets/bootstrap-timepicker/compiled/timepicker.css" />
+      
+    <!--external css-->
+    <link href="views/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="views/assets/fuelux/css/tree-style.css" />
+      <!--right slidebar-->
+      <link href="views/css/slidebars.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="views/css/style.css" rel="stylesheet">
+    <link href="views/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+    
+
+
+
+  </head>
+
+  <body>
+      
+      <section id="container" class="">
+      <?php include($user) ?>
+      <!--header end-->
+      <!--sidebar start-->
+      <?php include($aside) ?>
+      <!--sidebar end-->
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper site-min-height">
+
+          <!-- BEGIN PAGE CONTENT-->
+		  <div class="col-lg-7">
+		  <!-- Контрагент -->
+			  <aside class="panel tasks-widget">
+                         <?php
+                                $database = new database;
+                                $array_contragents= $database -> db_get_contragent_id($_GET['id']);
+                                $array_status = $database -> db_get_status();
+                                foreach($array_contragents as $contragent)
+                                {
+                         ?>
+                         <div class="chat-room-head">
+                             
+                             <div class="col-lg-2">
+                               <table>
+                                    <form action="?action=name_update" method="post" class="pull-right position">
+                                    <input type="hidden" name="contr_id" value="<?= $_GET['id'] ?>">
+                                    <tr>
+                                    <td>
+                                    <input type="text" size= "25px" name="contr_name" value="<?= $contragent['contr_name'] ?>" style="background-color: transparent;color: white;border: none;font-size: 24px; top:20px;" >
+                                             
+                                    </td>
+                                    <td>
+                                    <div class="col-lg-2">
+                                        <button class="btn btn-success btn-xs" style="display:none;"><i class=" fa fa-check" ></i></button>
+                                    </div>
+                                    </td>
+                                    </tr>
+                                    </form>
+                                 </table>
+                              </div>
+                            
+                             
+                             <form action="?action=status_update" method="post" class="pull-right position">
+                               <table>
+                                   <tr>
+                                       <td width="200px">
+                               <div class="col-lg-10">
+                               <input type="hidden" name="contr_id" value="<?= $_GET['id'] ?>">
+                                <select class="form-control m-bot15" name="contr_status">
+                                    <?php foreach($array_status as $status){
+                                        if($contragent['contr_status'] === $status['status_name'])  
+                                        {
+                                            print'<option selected value=" ">'.$status['status_name'].'</option>';
+                                        }
+                                        else
+                                        {
+                                             print'<option value="'.$status['status_name'].'">'.$status['status_name'].'</option>';
+                                        }
+                                   
+                                    }?>
+                                 </select>
+                                </div>
+                                        </td >
+                                       <td >
+                                <div class="col-lg-1">
+                                    <button class="btn btn-success btn-xs"><i class=" fa fa-check"></i></button>
+                                </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                             </form>
+                            </div>
+                         <?php } ?>
+ 
+                         <div class="panel-body bio-graph-info">
+                            <div class="row">
+                               <div class="room-box">
+                                 <div class="col-lg-5">
+                                    <form action="?action=category_update" method="post">
+                                      <div class="bio-row">
+                                          Категория                                      
+                                       </div>
+                                        
+                                       <div class="bio-row">
+                                          <table>
+                                          <tr>
+                                            <td>
+                                            <input type="hidden" name="contr_id" value="<?= $_GET['id'] ?>">
+                                            <select name="contr_category" class="form-control m-bot15" style=" width:150px">
+                                
+                                            <?php
+                                                $array_categorys = $database -> db_get_category();
+                                                foreach($array_categorys as $categorys)
+                                                {
+                                                    foreach($array_contragents as $contragent)
+                                                    {
+                                                        if($contragent['contr_category'] === $categorys['categor_id'])
+                                                        {
+                                                            print'<option value=" " selected>'.$categorys['categor_name'] .'</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="'.$categorys['categor_id'].'">'.$categorys['categor_name'] .'</option>';
+                                                        }
+                                                    }
+
+                                                }
+                                              ?>
+                                                 
+                                            </select>
+                                          </td>
+                                          <td>
+                                            <button class="btn btn-success btn-xs" style="margin-top: -20px; margin-left: 20px;"><i class=" fa fa-check"></i></button>
+                                          </td>
+                                      </tr>
+                                      </table>
+                                  </div>
+                                  </form>
+                                  <div class="bio-row">
+									  Тип контрагента                                      
+                                  </div>
+                         
+                                <form action ="?action=type_update" method="post">
+                                 <div class="bio-row">
+                                      <table>
+                                      <tr>
+                                          <td>
+                                          <input type="hidden" name="contr_id" value="<?= $_GET['id'] ?>">
+                                          <select name="contr_type" class="form-control m-bot15" style=" width:150px">';
+                                         <?php
+                                          $array_contragents= $database -> db_get_contragent_id($_GET['id']);
+                                          $array_types = $database -> db_get_contr_type();
+
+                                          foreach($array_contragents as $contragent)
+                                          {
+                                                foreach($array_types as $type)
+                                                {
+                                                    if($type['type_id'] === $contragent['contr_type'])
+                                                    {
+                                                        print'<option selected value="'.$type['type_id'].'">'.$type['type_name'].'</option>';
+                                                    }
+                                                    else
+                                                    {
+                                                        print'<option value="'.$type['type_id'].'">'.$type['type_name'].'</option>';
+                                                    }
+                                                }
+                                           
+                                          }?>
+
+                                          </select>
+                                          </td>
+                                          <td>
+                                            <button class="btn btn-success btn-xs" style="margin-top: -20px; margin-left: 20px;"><i class=" fa fa-check"></i></button>
+                                          </td>
+                                      </tr>
+                                      </table>
+                                  </div>
+                                  </form>
+                                  <form action="?action=responsible_update" method="post">
+                                  <div class="bio-row">
+                                      Ответственный
+								  </div>
+                                  <div class="bio-row">
+                                      <table>
+                                      <tr>
+                                          <td>
+                                          <input type="hidden" name="contr_id" value="<?= $_GET['id'] ?>">
+                                          <select name="contr_responsible" class="form-control m-bot15" style=" width:150px">';
+                                        <?php
+                                          $array_users = $database -> db_get_user();
+                                        
+                                          foreach($array_users as $user)
+                                          {
+                                                foreach($array_contragents as $contragent)
+                                                {
+                                                    $stage = $database -> db_get_stage_id($contragent['business_stage_id']);
+
+                                                    if($contragent['contr_user_id'] === $user['user_id'])
+                                                    {
+                                                        print'<option selected value=" ">'.$user['user_name'].' '.$user['user_lastname'].'</option>';
+                                                    }
+                                                    else
+                                                    {
+                                                        print'<option value="'.$user['user_id'].'">'.$user['user_name'].' '.$user['user_lastname'].'</option>';
+                                                    }
+                                                    
+                                                }
+                                            }?>
+                                                
+                                         
+
+                                          </select>
+                                          </td>
+                                          <td>
+                                            <button class="btn btn-success btn-xs" style="margin-top: -20px; margin-left: 20px;"><i class=" fa fa-check"></i></button>
+                                          </td>
+                                      </tr>
+                                      </table>
+                                  </div>
+                                  </form>
+                                     
+                                  <form action="?action=stage_update" method="post">
+                                  <div class="bio-row">
+                                      Стадия дела
+								  </div>
+                                  <div class="bio-row">
+                                      <table>
+                                      <tr>
+                                          <td>
+                                          <input type="hidden" name="contr_id" value="<?= $_GET['id'] ?>">
+                                          <select name="contr_stage" class="form-control m-bot15" style=" width:150px">';
+                                          <?php
+                                            $array_stages = $database -> db_get_stage();
+                                            
+                                            
+                                                foreach($array_stages as $stage)
+                                                {
+                                                    if($contragent['business_stage_id'] === $stage['stage_id'])
+                                                    {
+                                                        print'<option selected value=" ">'.$stage['stage_name'].'</option>';
+                                                    }
+                                                    else
+                                                    {
+                                                        print'<option value="'.$stage['stage_id'].'">'.$stage['stage_name'].'</option>';
+                                                    }
+                                                }
+                                            
+                                           ?> 
+                                          </select>
+                                          </td>
+                                          <td>
+                                            <button class="btn btn-success btn-xs" style="margin-top: -20px; margin-left: 20px;"><i class=" fa fa-check"></i></button>
+                                          </td>
+                                      </tr>
+                                      </table>
+                                  </div>
+                                  </form>
+                                  
+                            
+                                 
+								</div>
+
+                            <?php
+	                             foreach($array_contragents as $contragent)
+                                 { ?>
+
+								 
+                                 <input type="hidden" name="contr_id" value="<?= $_GET['id'] ?>">
+								 <div class="col-lg-5">
+								  <div class="bio-row">
+                                      Контакты 
+								  </div>
+                                 <form action="?action=email_update" method="post" >
+								  <div class="bio-row">
+
+                                            <table>
+                                                <tr>
+                                                <td>
+                                                <input type="text" name="contr_email" class="form-control" placeholder="Введите E-mail" value="<?= $contragent['contr_email'] ?>" style="width:200px"> 
+                                                </td>
+                                                <td>
+                                                <button class="btn btn-success btn-xs" style=" margin-left: 20px;"><i class=" fa fa-check"></i></button>
+                                                </td>
+                                                </tr>
+                                            </table>
+                                    </div>
+                                    </form>
+                                    <form action="?action=email_update_2" method="post" >
+                                    <input type="hidden" name="contr_id" value="<?= $_GET['id'] ?>">
+                                    <div class="bio-row">
+
+                                            <table>
+                                                <tr>
+                                                <td>
+                                                <input type="text" name="contr_email_2" class="form-control" placeholder="Введите  второй E-mail" value="<?= $contragent['contr_email_2'] ?>" style="width:200px"> 
+                                                </td>
+                                                <td>
+                                                <button class="btn btn-success btn-xs" style=" margin-left: 20px;"><i class=" fa fa-check"></i></button>
+                                                </td>
+                                                </tr>
+                                            </table>
+                                    </div>
+                                    </form>
+                                    
+                                   <form action="?action=phone_update_2" method="post">
+                                   <input type="hidden" name="contr_id" value="<?= $_GET['id'] ?>">
+                                      <div class="bio-row">
+                                             <table>
+                                                <tr><td>
+                                                  <input type="text" name="contr_phone" class="form-control" placeholder="Введите телефон" value="<?= $contragent['contr_phone'] ?>" style="width:200px"></td>
+                                                <td><button class="btn btn-success btn-xs" style=" margin-left: 20px;"><i class=" fa fa-check"></i></button></td>
+                                                </tr>
+                                             </table>
+                                      </div>
+                                     </form>
+                                     <form action="?action=phone_update_2" method="post">
+                                   <input type="hidden" name="contr_id" value="<?= $_GET['id'] ?>">
+                                      <div class="bio-row">
+                                             <table>
+                                                <tr><td>
+                                                  <input type="text" name="contr_phone_2" class="form-control" placeholder="Введите второй телефон" value="<?= $contragent['contr_phone_2'] ?>" style="width:200px"></td>
+                                                <td><button class="btn btn-success btn-xs" style=" margin-left: 20px;"><i class=" fa fa-check"></i></button></td>
+                                                </tr>
+                                             </table>
+                                      </div>
+                                     </form>
+                                   
+								  <div class="bio-row" style="text-align:right;margin-top:15px;">
+									
+								  </div>
+								</div>
+								<div class="col-lg-1" style="padding-right: 20px;">
+									
+								</div>
+								<div class="col-lg-12" style="margin-top:30px">
+								  <div class="bio-row">
+                                      Описание
+								  </div>
+                                  <form action="?action=comment_update" method="post">
+                                  
+								  <div class="bio-row">
+                                    <input type="hidden" value="<?= $_GET['id'] ?>" name="contr_id">
+									<textarea name="contr_comment" class="wysihtml5 form-control" rows="5" style="width:590px;resize:  vertical;" placeholder="Описание..."><?= $contragent['contr_comment']?></textarea>
+                                    <button class="btn btn-success btn-xs" style="margin-top: 10px; margin-left: 517px"><i >Сохранить</i></button>
+								  </div>
+                                  </form>
+							  	  </div>
+								</div>
+                          	</div>
+
+                        <?php } ?>
+            	</aside>
+			</div>
+			
+          <div class="row">
+          <div class="col-md-5">
+                  
+                  <!-- Задачи -->
+            <section class="panel">
+                          <header class="panel-heading">
+                              Задачи
+                            <span class="tools pull-right">
+                            <a class="<?php if(empty($_GET['flag'])){ echo 'fa fa-chevron-down';}else{ echo 'fa fa-chevron-up';} ?>" href="javascript:;" ></a>    
+                            </span>
+                          </header>
+                          <div class="panel-body" style="<?php if(empty($_GET['flag'])){ echo 'display:none';}else{ echo '';} ?>">
+                          <div  style="overflow-x: scroll;height: 400px;" >
+                              
+                          <?php include $task ?>
+                              
+                          </div>
+                              
+                              <div class="chat-form">
+                                   <form action="?action=task_add_task&location=<?= $_GET['location']?>&id=<?= $_GET['id']?>" method="post" >  
+                                    <input type="hidden" name="task_contragent_id" value="<?= $_GET['id']?>" >
+                                    
+                                    <strong style="color:#F67A6E"><?=  empty($error["task_time"])? '' : $error["task_time"]."!" ?></strong>
+                                
+                                    <strong style="color:#F67A6E"><?=  empty($error["task_comment"])? '' : $error["task_comment"]."!" ?></strong>
+                                        <select name = "task_name"  class="form-control" >
+                                            <option>Встреча</option>
+                                            <option>Звонок</option>
+                                            <option>Дело</option>
+                                            <option>Совещание</option>
+                                            <option>Вх звонок</option>
+                                            <option>Исх звонок</option>
+                                            <option>Личное</option>
+                                            <option>Корпоратив</option>
+                                            <option>Письмо</option>
+                                            <option>Заседание</option>
+                                        </select>
+                                       <br>
+                                     <div class="col-md-4">
+                                    
+                                     <div class="input-group bootstrap-timepicker"  >
+                                        
+                                        <input type="text"  name="task_time" class="form-control timepicker-24">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
+                                        </span>
+                                     </div>
+                                     </div>
+                                       <section id="container" class="">
+                                      <div class="col-md-7">
+                                      <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="<?php echo date('j-m-Y'); ?>"  class="input-append date dpYears">
+                                          <input name="task_date" type="text" readonly="" value="<?php echo date('j-m-Y'); ?>" size="16" class="form-control">
+                                              <span class="input-group-btn add-on">
+                                                <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
+                                              </span>
+                                      </div>
+                                       </div>
+                                       </section>
+                                        
+                                     <br>
+                                  
+                          
+                                     
+                                   <div class="input-cont ">
+                                      <input name="task_comment" type="text" class="form-control col-lg-12" placeholder="Введите сообщение...">
+                                   </div>
+                                    
+                                   <div class="form-group">
+                                      <div class="pull-right chat-features">
+                                          
+                                          <button class="btn btn-danger" href="javascript:;">Отправить</button>
+                                      </div>
+                                      
+                                    </div>
+                                  </form>
+
+                              </div>
+                          </div>
+              </section>
+              <!-- Задачи -->
+                
+                  <!-- Заметки -->
+              
+                  <?php include $note ?>
+				  <?php if(isset($error))
+                        {
+                           echo "<body onLoad=" . "document.getElementById("."'sbm2'".").click()>";
+                        }
+                   ?>
+                  <!--Заметки -->
+              
+				  
+                 
+				  <!-- Реквизиты -->
+				  <div class="panel">
+                      <div class="panel-heading">
+                          Реквизиты
+                          <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            </span>
+                      </div>
+                      <div class="panel-body" style="display:none">
+						<div class="margin-top:0px;">
+						<div class="room-box">
+						<div class="col-lg-12"      style="padding-left: 0px;padding-right: 0px;">
+                        <iframe name="iframe1" style="position: absolute; left: -9999px;"></iframe>
+                        <form target="iframe1" action="?action=req_add_requisites&contagent_id=<?= $_GET['id'] ?>" method="POST" >
+                        <?php
+                            $database = new database;
+                            $array_requisites = $database->db_get_requisites_id($_GET['id']);
+                            
+                            if(empty($array_requisites)){$array_requisites = [1];}
+                            foreach($array_requisites as $req){ ?>
+                        
+							<div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row" style="padding-top: 8px;">
+									  Наименование                                      
+								  </div>
+							</div>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								      <input name="req_name" type="text" class="form-control" value="<?= $req['req_name']?>">
+                                  </div>
+                            </div>
+                            <div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row" style="padding-top: 8px;">
+									  ИНН                                      
+								  </div>
+							</div>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								      <input name="req_inn" type="text" class="form-control" value="<?= $req['req_inn']?>">
+                                  </div>
+                            </div> 
+                            <div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row" style="padding-top: 8px;">
+									  Юр. адрес                                      
+								  </div>
+							</div>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								      <input name="req_yur_adress" type="text" class="form-control" value="<?= $req['req_yur_adress']?>">
+                                  </div>
+                            </div> 
+                            <div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row" style="padding-top: 8px;">
+									  Факт. адрес                                      
+								  </div>
+							</div>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								      <input name="req_actual_adress" type="text" class="form-control" value="<?= $req['req_actual_adress']?>">
+                                  </div>
+                            </div> 
+                            <div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row" style="padding-top: 8px;">
+									  КПП                                      
+								  </div>
+							</div>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								      <input name="req_kpp" type="text" class="form-control" value="<?= $req['req_kpp']?>">
+                                  </div>
+                            </div>      
+                        	<div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row" style="padding-top: 8px;">
+									   ОГРН                                    
+								  </div>
+							</div>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								      <input name="req_ogrn" type="text" class="form-control" value="<?= $req['req_ogrn']?>">
+                                  </div>
+                            </div> 
+                            <div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row" style="padding-top: 8px;">
+									    ОКПО                                  
+								  </div>
+							</div>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								    	<input name="req_okpo" type="text" class="form-control"  value="<?= $req['req_okpo']?>">
+                                  </div>
+                            </div>  
+                            <div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row" style="padding-top: 8px;">
+									    БИК                                  
+								  </div>
+							</div>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								    	<input name="req_bik" type="text" class="form-control" value="<?= $req['req_bik']?>">
+                                  </div>
+                            </div>     
+							<div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row" style="padding-top: 8px;">
+									    Расчетный счет                                  
+								  </div>
+							</div>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								       <input name="req_score" type="text" class="form-control" value="<?= $req['req_score']?>">
+                                  </div>
+                            </div>  
+                            <div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row" style="padding-top: 8px;">
+									    Кор. счет                                   
+								  </div>
+							</div>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								      <input name="req_kor_score" type="text" class="form-control" value="<?= $req['req_kor_score']?>">
+                                  </div>
+                            </div>
+                            <div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row" style="padding-top: 8px;">
+									    Подп. лицо                                   
+								  </div>
+							</div>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								      <input name="req_pod_face" type="text" class="form-control" value="<?= $req['req_pod_face']?>">
+                                  </div>
+                            </div>  
+                            <div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row" style="padding-top: 8px;">
+									    На основании                                   
+								  </div>
+							</div>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								      <input name="req_base" type="text" class="form-control" value="<?= $req['req_base']?>">
+                                  </div>
+                            </div>
+                            <div class="col-lg-4"      style="padding-left: 0px;padding-right: 0px;padding-top: 15px;">
+                            	<button data-toggle="" href="" class="btn btn-success btn-sm">Сохранить изменения</button>                                   
+							</div>
+                           
+                            <?php } ?>
+                             </form>
+							<div class="col-lg-8" style="padding-left: 0px;padding-right: 0px;">
+								  <div class="bio-row">
+								      
+                                  </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+					  </div> 
+				  </div>
+					  
+				  <!-- Документы -->
+				  <div class="panel">
+                      <div class="panel-heading">
+                          Документы
+                          <span class="tools pull-right">
+                          		<a href="?location=kontragent_one&id=<?=$_GET['id']?>&upload_file" class="fa fa-plus"></a>
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            </span>
+						  </div>
+                        <div class="panel-body" style="display:none">
+                                <div class="bio-row">
+                          <?php
+                            $database = new database;
+                            $array_files = $database->db_get_file_id($_GET['id']);
+                    
+
+                            foreach($array_files as $file)
+                            {
+                      
+                              print'
+                                    <div class="col-lg-2"      style="padding-left: 12px;padding-right: 0px;">
+                                          <img alt="" src="views/img/file-search/doc.png">
+                                    </div>
+                                    <div class="col-lg-10" style="padding-left: 0px;padding-right: 0px;padding-top: 8px;">
+                                          <strong><a href="views/files/'.$file["file_name"].'">'.$file["file_name"].'</a></strong>
+                                    </div>
+                                ';
+                             }
+                          ?>
+                                   
+                            </div>
+                        </div>
+                          
+                    </div>
+                  
+				  
+				   
+				    <!-- Процессы -->
+				  <div class="panel">
+                      <div class="panel-heading">
+                          Процессы
+                          <span class="tools pull-right">
+                          		
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            </span>
+						  </div>
+						  <div class="panel-body" style="display:none">
+						  	<div class="col-lg-12">
+						  		<div class="room-box">
+						  			Дело 1.2 УЛ
+						  			<span class="tools pull-right">
+                          				<button class="btn btn-success btn-xs">
+											<i class=" fa fa-long-arrow-right"></i>
+										</button>
+                            		</span>
+						  		</div>
+						  	</div>	  
+                        </div>
+                    </div>
+                       
+                  <!-- Контактные лица -->
+				  <div class="panel">
+                      <div class="panel-heading">
+                          Контактные лица
+                          <span class="tools pull-right">
+                          		
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            </span>
+						  </div>
+						  <div class="panel-body" style="display:none">
+						  	<div class="col-lg-12">
+                                <?php
+                                    $database = new database;
+                                    
+                                    $array_contacts = $database -> db_get_contact();
+
+                                    foreach($array_contacts as $contact)
+                                    {
+                                            if($contact['cont_contragent'] === $_GET['id'])
+                                            {
+                                                  print'
+                                                     <a href="?location=contact_one&id='.$contact['cont_id'].'">'.$contact['cont_fullname'].' </a><hr>   
+                                                  ';
+                                            }
+                                    }
+                                    
+                                ?>
+						  	</div>
+                       </div>
+				   </div>
+                    
+                 <!-- Изменения контрагентов -->
+                  <?php include($update); ?>
+                <!-- update_contragent -->
+              
+            
+
+          </div>
+          </div>
+              <?php if(isset($_GET['upload_file'])){ echo "<body onLoad=" . "document.getElementById("."'sbm_upload'".").click()>";} ?>
+                  <a id="sbm_upload" href="#myModal4" style="color: #000;text-decoration:none;" data-toggle="modal"></a>
+                <!--Modal загрузка документа-->
+      
+                            
+                              
+                              <div class="modal fade modal-dialog-center " id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog ">
+                                      <div class="modal-content-wrap">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                  <h4 class="modal-title">Новая задача</h4>
+                                              </div>
+                                            
+                                               <div class="form-group">
+                                                   <br>
+                                                  <form action="?action=file_upload&contragent_id=<?= $_GET['id'] ?>" method="post" enctype=multipart/form-data>
+                                                  <table>
+                                                      <tr>
+                                                          <td>
+                                                              <input class="col-lg-10" name="uploadfile[]" type="file" class="file-pos"  multiple>
+                                                          </td>
+                                                          <td>
+                                                              <button data-toggle="" href="" class="btn btn-success btn-sm">Загрузить</button>
+                                                          </td>
+                                                      </tr>
+                                                  </table>
+                                                  </form>    
+                                                   <br>
+                                            </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                                </div>
+                            
+                <!-- Modal загрузка документа -->
+
+              
+                  <?php if(isset($_GET['task_id'])){ echo "<body onLoad=" . "document.getElementById("."'sbm'".").click()>";} ?>
+                  <a id="sbm" href="#myModal3" style="color: #000;text-decoration:none;" data-toggle="modal"></a>
+                  <!--Modal 3 редактировать задачу-->
+                            <form action="?location=task_update&header=kontragent_one&id=<?= $_GET['id']?>&task_id=<?= $_GET['task_id'] ?>" method="post">
+                              <div class="modal fade modal-dialog-center " id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog ">
+                                      <div class="modal-content-wrap">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                  <h4 class="modal-title">Редактировать задачу</h4>
+                                              </div>
+                                              <input type="hidden" name="task_contragent_id"  value="<?= $_GET['id']?>">
+                                              <?php 
+                                                        $database = new database;
+                                                        
+                                                        if(isset($_GET['task_id']))
+                                                        {
+                                                            $array_task = $database -> db_get_task_id($_GET['task_id']);
+                                                        }
+                                                        
+                                                        foreach($array_task as $task){
+                                                    ?>
+                                              <div class="modal-body">
+                                                    
+													<br/>
+                                                    
+													<select name="task_name" class="form-control">
+                                                        <?php
+                                                        if($task['task_name'] === 'Встреча')
+                                                        {
+                                                            print'<option selected value="Встреча">Встреча</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Встреча">Встреча</option>';
+                                                        }
+                                                        
+                                                        if($task['task_name'] === 'Звонок')
+                                                        {
+                                                            print'<option selected value="Звонок">Звонок</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Звонок">Звонок</option>';
+                                                        }
+    
+                                                        if($task['task_name'] === 'Дело')
+                                                        {
+                                                            print'<option selected value="Дело">Дело</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Дело">Дело</option>';
+                                                        }
+
+                                                        if($task['task_name'] === 'Совещание')
+                                                        {
+                                                            print'<option selected value="Совещание">Совещание</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Совещание">Совещание</option>';
+                                                        }
+    
+                                                        if($task['task_name'] === 'Вх звонок')
+                                                        {
+                                                            print'<option selected value="Вх звонок">Вх звонок</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Вх звонок">Вх звонок</option>';
+                                                        }
+
+                                                        if($task['task_name'] === 'Исх звонок')
+                                                        {
+                                                            print'<option selected value="Исх звонок">Исх звонок</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Исх звонок">Исх звонок</option>';
+                                                        }
+
+                                                        if($task['task_name'] === 'Личное')
+                                                        {
+                                                            print'<option selected value="Личное">Личное</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Личное">Личное</option>';
+                                                        }
+
+                                                        if($task['task_name'] === 'Корпоратив')
+                                                        {
+                                                            print'<option selected value="Корпоратив">Корпоратив</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Корпоратив">Корпоратив</option>';
+                                                        }
+
+
+                                                        if($task['task_name'] === 'Письмо')
+                                                        {
+                                                            print'<option selected value="Письмо">Письмо</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Письмо">Письмо</option>';
+                                                        }
+    
+                                                        if($task['task_name'] === 'Заседание')
+                                                        {
+                                                            print'<option selected value="Заседание">Заседание</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Заседание">Заседание</option>';
+                                                        }
+
+                                                        if($task['task_name'] === 'Выполнено')
+                                                        {
+                                                            print'<option selected value="Выполнено">Выполнено</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Выполнено">Выполнено</option>';
+                                                        }
+
+
+                                                        if($task['task_name'] === 'Не выполнено')
+                                                        {
+                                                            print'<option selected value="Не выполнено">Не выполнено</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            print'<option value="Не выполнено">Не выполнено</option>';
+                                                        }
+                                                     
+                                                        ?>
+                                                    </select>
+													<br/>
+                                                 
+                                                    <div class="col-md-4">  
+                                                    <div class="input-group bootstrap-timepicker"  >                                      
+                                                        <input type="text"  name="task_time"  class="form-control" value="<?= $task['task_time'] ?>">
+                                                        
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-default" type="button"><i class="fa fa-clock-o"></i></button>
+                                                        </span>
+                                                    </div>
+                                                  </div>
+                                                  
+                                                  <div class="col-md-7">
+                                                    <div data-date-viewmode="years" data-date-format="yyyy-mm-dd" data-date="<?php echo date('Y-m-j'); ?>"  class="input-append date dpYears">
+                                                         
+                                                    <input name="task_date" type="text"  readonly=""  value="<?= $task['task_date'] ?>"   class="form-control">
+                                                        
+                                                        <span class="input-group-btn add-on" >
+                                                            <button class="btn btn-danger" type="button"><i class="fa fa-calendar"></i></button>
+                                                        </span>
+                                                    </div>
+                                                  </div>
+                                       
+                                       
+													<br/>
+                                                    <textarea name="task_comment" class="wysihtml5 form-control" rows="5" placeholder="Описание"> <?= $task['task_comment'] ?> </textarea>
+                                                     <br/>
+								                    <?}?>
+                                              
+                                                  <input class="btn btn-warning" type="submit" value="сохранить">
+                                                
+                                          </div>
+                                          
+                                      </div>
+                                  </div>
+                              </div>
+                                </div>
+                                
+                            </form>
+                <!-- Modal редактирвать задачу -->      
+                                 
+                
+
+          <!-- END PAGE CONTENT-->
+          </section>
+      </section>
+      <!--main content end-->
+      <!--footer start-->
+      <footer class="site-footer">
+          <div class="text-center">
+              2015 &copy; CRM by Mandryka.
+              <a href="#" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+      <!--footer end-->
+  </section>
+   <script type="text/javascript">
+ 
+  
+     
+</script>
+
+ 
+   
+ 
+    
+
+   
+    <!-- js placed at the end of the document so the pages load faster -->
+   
+    <script src="views/js/jquery.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+      <!--right slidebar-->
+    <script src="views/js/slidebars.min.js"></script>
+
+  
+    <!--this page  script only-->
+    <script src="views/js/advanced-form-components.js"></script>
+    
+  
+   
+    
+      
+    <script src="views/js/jquery.js"></script>
+    <script src="views/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="views/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="views/js/jquery.scrollTo.min.js"></script>
+    <script src="views/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="views/js/respond.min.js" ></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+    <!--common script for all pages-->
+    <script src="views/js/common-scripts.js"></script>
+    <script src="views/js/tasks.js" type="text/javascript"></script>
+    <script src="views/js/slidebars.min.js"></script>
+
+   <script type="text/javascript" src="views/assets/fuelux/js/spinner.min.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-daterangepicker/moment.min.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+    <script type="text/javascript" src="views/assets/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+
+    <script src="views/js/advanced-form-components.js"></script>
+
+
+
+    <script>  
+        
+        function show()  
+        {  
+            function update()
+            {
+                $.ajax({  
+                    url: "views/crm_notes/crm_notes.php?location=kontragent_one&id=3",  
+                    cache: false,  
+                    success: function(html){  
+                        $("#content").html(html);  
+                    }  
+                }); 
+            }
+            setTimeout(update, 50);
+        }  
+ 
+    </script> 
+
+
+    <script>
+      jQuery(document).ready(function() {
+          TaskList.initTaskWidget();
+      });
+
+      $(function() {
+          $( "#sortable" ).sortable();
+          $( "#sortable" ).disableSelection();
+      });
+
+    </script>
+
+  </body>
+</html>

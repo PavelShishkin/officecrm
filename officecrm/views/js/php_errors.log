@@ -1,0 +1,2 @@
+[21-Jun-2016 11:46:59 Europe/Berlin] PHP Fatal error:  Call to a member function fetchAll() on boolean in /Applications/XAMPP/xamppfiles/htdocs/officecrm/models/database.php on line 458
+[21-Jun-2016 11:47:11 Europe/Berlin] PHP Fatal error:  Call to a member function fetchAll() on boolean in /Applications/XAMPP/xamppfiles/htdocs/officecrm/models/database.php on line 458

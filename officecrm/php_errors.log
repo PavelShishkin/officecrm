@@ -1,0 +1,29 @@
+[21-Jun-2016 11:43:31 Europe/Berlin] PHP Parse error:  syntax error, unexpected end of file, expecting variable (T_VARIABLE) or ${ (T_DOLLAR_OPEN_CURLY_BRACES) or {$ (T_CURLY_OPEN) in /Applications/XAMPP/xamppfiles/htdocs/officecrm/autoload.php on line 16
+[21-Jun-2016 11:43:33 Europe/Berlin] PHP Parse error:  syntax error, unexpected end of file, expecting variable (T_VARIABLE) or ${ (T_DOLLAR_OPEN_CURLY_BRACES) or {$ (T_CURLY_OPEN) in /Applications/XAMPP/xamppfiles/htdocs/officecrm/autoload.php on line 16
+[21-Jun-2016 11:43:37 Europe/Berlin] PHP Parse error:  syntax error, unexpected end of file, expecting variable (T_VARIABLE) or ${ (T_DOLLAR_OPEN_CURLY_BRACES) or {$ (T_CURLY_OPEN) in /Applications/XAMPP/xamppfiles/htdocs/officecrm/autoload.php on line 16
+[21-Jun-2016 11:43:38 Europe/Berlin] PHP Parse error:  syntax error, unexpected end of file, expecting variable (T_VARIABLE) or ${ (T_DOLLAR_OPEN_CURLY_BRACES) or {$ (T_CURLY_OPEN) in /Applications/XAMPP/xamppfiles/htdocs/officecrm/autoload.php on line 16
+[21-Jun-2016 11:46:09 Europe/Berlin] PHP Parse error:  syntax error, unexpected end of file in /Applications/XAMPP/xamppfiles/htdocs/officecrm/function.php on line 66
+[21-Jun-2016 11:46:44 Europe/Berlin] PHP Fatal error:  Call to a member function fetchAll() on boolean in /Applications/XAMPP/xamppfiles/htdocs/officecrm/models/database.php on line 775
+[21-Jun-2016 11:46:49 Europe/Berlin] PHP Fatal error:  Call to a member function fetchAll() on boolean in /Applications/XAMPP/xamppfiles/htdocs/officecrm/models/database.php on line 775
+[21-Jun-2016 11:46:51 Europe/Berlin] PHP Fatal error:  Call to a member function fetchAll() on boolean in /Applications/XAMPP/xamppfiles/htdocs/officecrm/models/database.php on line 775
+[21-Jun-2016 11:46:58 Europe/Berlin] PHP Fatal error:  Call to a member function fetchAll() on boolean in /Applications/XAMPP/xamppfiles/htdocs/officecrm/models/database.php on line 775
+[21-Jun-2016 11:46:59 Europe/Berlin] PHP Notice:  Undefined index: id in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-calendar.html on line 180
+[21-Jun-2016 11:46:59 Europe/Berlin] PHP Notice:  Undefined index: task_id in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-calendar.html on line 180
+[21-Jun-2016 11:46:59 Europe/Berlin] PHP Notice:  Undefined index: id in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-calendar.html on line 189
+[21-Jun-2016 11:46:59 Europe/Berlin] PHP Notice:  Undefined variable: array_task in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-calendar.html on line 198
+[21-Jun-2016 11:46:59 Europe/Berlin] PHP Warning:  Invalid argument supplied for foreach() in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-calendar.html on line 198
+[21-Jun-2016 11:46:59 Europe/Berlin] PHP Notice:  Undefined index: id in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-calendar.html on line 381
+[21-Jun-2016 11:47:05 Europe/Berlin] PHP Notice:  Undefined variable: of_id in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-office.html on line 222
+[21-Jun-2016 11:47:07 Europe/Berlin] PHP Fatal error:  Call to a member function fetchAll() on boolean in /Applications/XAMPP/xamppfiles/htdocs/officecrm/models/database.php on line 775
+[21-Jun-2016 11:47:08 Europe/Berlin] PHP Fatal error:  Call to a member function fetchAll() on boolean in /Applications/XAMPP/xamppfiles/htdocs/officecrm/models/database.php on line 775
+[21-Jun-2016 11:47:11 Europe/Berlin] PHP Notice:  Undefined index: id in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-calendar.html on line 180
+[21-Jun-2016 11:47:11 Europe/Berlin] PHP Notice:  Undefined index: task_id in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-calendar.html on line 180
+[21-Jun-2016 11:47:11 Europe/Berlin] PHP Notice:  Undefined index: id in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-calendar.html on line 189
+[21-Jun-2016 11:47:11 Europe/Berlin] PHP Notice:  Undefined variable: array_task in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-calendar.html on line 198
+[21-Jun-2016 11:47:11 Europe/Berlin] PHP Warning:  Invalid argument supplied for foreach() in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-calendar.html on line 198
+[21-Jun-2016 11:47:11 Europe/Berlin] PHP Notice:  Undefined index: id in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-calendar.html on line 381
+[21-Jun-2016 11:47:27 Europe/Berlin] PHP Notice:  Undefined variable: of_id in /Applications/XAMPP/xamppfiles/htdocs/officecrm/views/crm-office.html on line 222
+[21-Jun-2016 11:47:29 Europe/Berlin] PHP Fatal error:  Call to a member function fetchAll() on boolean in /Applications/XAMPP/xamppfiles/htdocs/officecrm/models/database.php on line 775
+[21-Jun-2016 11:47:34 Europe/Berlin] PHP Fatal error:  Call to a member function fetchAll() on boolean in /Applications/XAMPP/xamppfiles/htdocs/officecrm/models/database.php on line 775
+[21-Jun-2016 11:47:36 Europe/Berlin] PHP Fatal error:  Call to a member function fetchAll() on boolean in /Applications/XAMPP/xamppfiles/htdocs/officecrm/models/database.php on line 775
+[21-Jun-2016 11:47:43 Europe/Berlin] PHP Fatal error:  Call to a member function fetchAll() on boolean in /Applications/XAMPP/xamppfiles/htdocs/officecrm/models/database.php on line 775
